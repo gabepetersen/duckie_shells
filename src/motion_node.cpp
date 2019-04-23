@@ -26,8 +26,6 @@ class VelocityConverter {
 			}
 			// default car number
 			carNum = 1;
-			// Here is the sepcification of the graph size
-			graph_size = 5;
 			// get the car number and do some string operations to get correct subscription/publisher topics
 			graph_initialize();
 			nhp.getParam("car_number", carNum);
@@ -109,6 +107,8 @@ void VelocityConverter::trajectory_callback(const geometry_msgs::Point::ConstPtr
  * Edges can be added through the add_edge_function - specifiying the vertices
  */
 void VelocityConverter::graph_initialize() {
+	// Here is the sepcification of the graph size
+	graph_size = 5;
 	/// clear graph first
 	for(int i = 0; i < graph_size; i++) {
 		for(int j = 0; j < graph_size; j++) {

@@ -58,14 +58,15 @@ Commment the code between the PRINTING FOR DEBUGGING sections.
    - Very Sensitive to input geometry_msgs::Point from QTInterface
 
 ### Example Of Use
-...
+In Launch File
 ```
-<!-- In Launch File -->
 <node name="motion_node_car1" pkg="duckie_shells" type="motion_node" output="screen">
-		<param name="car_number" type="int" value="1"/> 
+	<param name="car_number" type="int" value="1"/> 
 </node>
 ```
 ...
+
+In graph_initialize()
 ```
 // An example of a graph_intialization implementation:
 void VelocityConverter::graph_initialize() {

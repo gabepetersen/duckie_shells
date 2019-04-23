@@ -86,6 +86,7 @@ void VelocityConverter::graph_initialize() {
 }
 ```
 ...
+
 In localizationHelper(...)
   ```
   float diff_threshold = how close you want the duckiebot to get to the vertices;
@@ -95,8 +96,9 @@ In localizationHelper(...)
   float y_turn_threshold = differences of vertex y's on tile/intersection tile;
   ```
 ...
-TODO: Develop QT interface to publish to 
- - /trajectory/car1
+
+TODO: Develop QT interface to publish to /trajectory/car1
+ 
 ...
 ```
 roslaunch duckie_shells *your launch file name here*

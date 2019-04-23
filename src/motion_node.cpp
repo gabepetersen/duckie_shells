@@ -345,7 +345,7 @@ void VelocityConverter::localizationHelper(int parent[], int u) {
 	velocity_publisher.publish(velocity_command);
 
 	/// latch time until duckiebot completes its mission
-	while((desired_point.x - current_pose.x > 0.1) && (desired_point.y - current_pose.y > 0.1));
+	while((desired_point.x - current_pose.x > diff_threshold) && (desired_point.y - current_pose.y > diff_threshold));
 }
 /// Calculates the linear distance between two points: (xi, yi) to (xf, yf)
 float VelocityConverter::lin_dist(float xi, float xf, float yi, float yf) {

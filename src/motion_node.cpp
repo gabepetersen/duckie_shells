@@ -26,6 +26,8 @@ class VelocityConverter {
 			}
 			// default car number
 			carNum = 1;
+			// Here is the sepcification of the graph size
+			graph_size = 5;
 			// get the car number and do some string operations to get correct subscription/publisher topics
 			graph_initialize();
 			nhp.getParam("car_number", carNum);
@@ -107,8 +109,6 @@ void VelocityConverter::trajectory_callback(const geometry_msgs::Point::ConstPtr
  * Edges can be added through the add_edge_function - specifiying the vertices
  */
 void VelocityConverter::graph_initialize() {
-	// Here is the sepcification of the graph size
-	graph_size = 5;
 	/// clear graph first
 	for(int i = 0; i < graph_size; i++) {
 		for(int j = 0; j < graph_size; j++) {
@@ -150,7 +150,6 @@ void VelocityConverter::graph_add_vertex(int vertex_index, float x_val, float y_
 }
 /* Dixtra's shortest path algorithm that stores the shortest path steps
  * Algorithm from https://www.geeksforgeeks.org/printing-paths-dijkstras-shortest-path-algorithm/
- * Returns array of shortest distances based on vertex indicies
  */
 void VelocityConverter::graph_dixtra(int source_index, int parent_path[], float dist[]) {
 	bool sepSet[graph_size];
@@ -345,7 +344,7 @@ void VelocityConverter::localizationHelper(int parent[], int u) {
 	velocity_publisher.publish(velocity_command);
 
 	/// latch time until duckiebot completes its mission
-	while((desired_point.x - current_pose.x > diff_threshold) && (desired_point.y - current_pose.y > diff_threshold));
+	while((desired_point.x - current_pose.x > 0.1) && (desired_point.y - current_pose.y > 0.1));
 }
 /// Calculates the linear distance between two points: (xi, yi) to (xf, yf)
 float VelocityConverter::lin_dist(float xi, float xf, float yi, float yf) {

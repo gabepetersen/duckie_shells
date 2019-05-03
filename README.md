@@ -4,10 +4,10 @@ Programmable shells for students of RET site
 Implementation of the Motion Node
 
 ------------------------------------------------------------------------
-# C++ Implementation 
+# C++ & Python Implementation 
 ------------------------------------------------------------------------
 
-### Instructions on how to run:
+### Instructions on how to run for both python and C++:
 
 1. Since there will be multiple cars in the duckietown implementation a parameter: 'car_number' must be specified upon launch to match with the correct vicon object (used in conjunction with vicon_track_multiple)
    - Set up private parameter of 'car_number' in launch file
@@ -16,7 +16,7 @@ Implementation of the Motion Node
 
    - To define verticies in the graph, a vertex corresponds to every beginning/end of an intersection AND turn. For example, a simple 90 degree turn tile in duckietown would have two verticies: one at the beginning of the turn and one at the end. 
   
-   - To specify the graph size, alter the graph_size variable
+   - To specify the graph size, alter the graph_size variable in default constructor
   
    - To insert a vertex into the graph, use... 
     graph_add_vertex(int vertex_index, float x_val, float y_val)
@@ -42,20 +42,26 @@ Implementation of the Motion Node
 	  float x_turn_threshold = 0.1;
     	  float y_turn_threshold = 0.1;
 	  ```
+4. ```catkin build``` the package
 
-4. To make this work properly, current_pose from vicon tracking must yield correct information.
+5. ```rosrun duckie_shells motion_node``` for C++ version and ```rosrun duckie_shells motion_node.py``` for Python version
+
+5. To make this work properly, current_pose from vicon tracking must yield correct information.
 The trajectory geometry_msgs::Point messages from the QT interface must also be correct in 
 correspondance with the graph initialization.
 
-5. To suppress the printing of each step during the algorithm, 
+6. To suppress the printing of each step during the algorithm, 
 edit the function: localization(geometry_msgs::Point desired_point).
-Commment the code between the PRINTING FOR DEBUGGING sections.
+Commment the code between the PRINTING FOR DEBUGGING sections. Printing
+in python is buggy due to the print(...) function outputting a newline upon
+each call
 
-6. Possible Errors:
+7. Possible Errors:
    - While loop in localizationHelper(...) has potential of getting stuck in infinite loop if not the diff_threshold parameter is not initialized properly.
    - Have not tested the algorithm on the actual duckiebot
    - Have not tested in conjunction with the lane_detection node
    - Very Sensitive to input geometry_msgs::Point from QTInterface
+   - Printing example for python node is slightly buggy
 
 ### Example Of Use
 In Launch File
